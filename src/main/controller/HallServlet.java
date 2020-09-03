@@ -26,6 +26,7 @@ public class HallServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        aggregatePlace();
         req.setCharacterEncoding("UTF-8");
         req.getRequestDispatcher(req.getContextPath() + "/index.jsp").forward(req, resp);
     }
@@ -35,14 +36,15 @@ public class HallServlet extends HttpServlet {
         super.doPost(req, resp);
     }
 
-    private JSONArray aggregatePlace() {
-        JSONArray result = new JSONArray();
+    private JSONObject aggregatePlace() {
+        JSONObject result = new JSONObject();
         Store store = PsqlStore.instOf();
         List<Place> hall = new ArrayList<>(store.getHall());
         if (hall.isEmpty()) {
             return ifHallIsEmpty(store);
         }
         for (int i = 0; i < store.getRows().size(); i++) {
+            int row = i + 1;
             JSONObject jsonObject = new JSONObject();
             for (Place place : hall) {
                 if (place.getUser() != null) {
@@ -50,18 +52,19 @@ public class HallServlet extends HttpServlet {
                 }
                 jsonObject.put(String.valueOf(place.getSeat()), true);
             }
-            result.put(jsonObject);
+            result.put(String.valueOf(row), jsonObject);
         }
         return result;
     }
 
-    private JSONArray ifHallIsEmpty(Store store) {
-        JSONArray result = new JSONArray();
+    private JSONObject ifHallIsEmpty(Store store) {
+        JSONObject result = new JSONObject();
         for (int i = 0; i < store.getRows().size(); i++) {
+            int row = i + 1;
             JSONObject jsonObject = new JSONObject();
             store.getSeats()
                     .forEach(seat -> jsonObject.put(String.valueOf(seat), true));
-            result.put(jsonObject);
+            result.put(String.valueOf(row), jsonObject);
         }
         return result;
     }
