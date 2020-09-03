@@ -9,6 +9,12 @@ import java.util.Collection;
  * @version 1.0
  * @since 03.09.2020
  */
-public interface Store<Place> {
-    Collection<Place> findFreePlaces();
+public interface Store {
+    Collection<Place> getHall();
+
+    Collection<Integer> getRows();
+
+    Collection<Integer> getSeats();
+
+    User findUserByID(int id);
 }

@@ -20,11 +20,16 @@ public class Place {
      * Seat
      */
     private final int seat;
+    /**
+     * User
+     */
+    private final User user;
 
-    public Place(int id, int row, int seat) {
+    public Place(int id, int row, int seat, User user) {
         this.id = id;
         this.row = row;
         this.seat = seat;
+        this.user = user;
     }
 
     public int getId() {
@@ -39,6 +44,10 @@ public class Place {
         return seat;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,11 +55,12 @@ public class Place {
         Place place = (Place) o;
         return id == place.id &&
                 row == place.row &&
-                seat == place.seat;
+                seat == place.seat &&
+                Objects.equals(user, place.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, row, seat);
+        return Objects.hash(id, row, seat, user);
     }
 }
