@@ -39,8 +39,29 @@ public class HallServlet extends HttpServlet {
         JSONArray result = new JSONArray();
         Store store = PsqlStore.instOf();
         List<Place> hall = new ArrayList<>(store.getHall());
-        for (int i = 0; i< store.getRows().size();i++){
+        if (hall.isEmpty()) {
+            return ifHallIsEmpty(store);
+        }
+        for (int i = 0; i < store.getRows().size(); i++) {
+            JSONObject jsonObject = new JSONObject();
+            for (Place place : hall) {
+                if (place.getUser() != null) {
+                    jsonObject.put(String.valueOf(place.getSeat()), false);
+                }
+                jsonObject.put(String.valueOf(place.getSeat()), true);
+            }
+            result.put(jsonObject);
+        }
+        return result;
+    }
 
+    private JSONArray ifHallIsEmpty(Store store) {
+        JSONArray result = new JSONArray();
+        for (int i = 0; i < store.getRows().size(); i++) {
+            JSONObject jsonObject = new JSONObject();
+            store.getSeats()
+                    .forEach(seat -> jsonObject.put(String.valueOf(seat), true));
+            result.put(jsonObject);
         }
         return result;
     }
