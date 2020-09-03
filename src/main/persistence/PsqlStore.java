@@ -94,12 +94,34 @@ public class PsqlStore implements Store {
 
     @Override
     public Collection<Integer> getRows() {
-        return null;
+        List<Integer> result = new ArrayList<>();
+        try (Connection connection = pool.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery("SELECT * FROM rows");
+            while (rs.next()) {
+                result.add(rs.getInt("row"));
+            }
+        } catch (SQLException throwables) {
+            LOG.error(throwables.getSQLState(), throwables);
+            throwables.printStackTrace();
+        }
+        return result;
     }
 
     @Override
     public Collection<Integer> getSeats() {
-        return null;
+        List<Integer> result = new ArrayList<>();
+        try (Connection connection = pool.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery("SELECT * FROM seats");
+            while (rs.next()) {
+                result.add(rs.getInt("seat"));
+            }
+        } catch (SQLException throwables) {
+            LOG.error(throwables.getSQLState(), throwables);
+            throwables.printStackTrace();
+        }
+        return result;
     }
 
     @Override
