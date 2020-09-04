@@ -43,6 +43,7 @@
                     document.getElementById(id).innerHTML =
                         '<td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>'
                 }
+                id++;
             }
         }).fail(function (error) {
             alert(error)
