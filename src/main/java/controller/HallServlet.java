@@ -49,8 +49,7 @@ public class HallServlet extends HttpServlet {
         JSONObject result = ifHallIsEmpty(store);
         List<Place> hall = new ArrayList<>(store.getHall());
         hall.forEach(place -> {
-            result.remove(String.valueOf(place.getRow()));
-            JSONObject elem = new JSONObject();
+            JSONObject elem = result.getJSONObject(String.valueOf(place.getRow()));
             elem.put(String.valueOf(place.getSeat()), false);
             result.put(String.valueOf(place.getRow()), elem);
         });
