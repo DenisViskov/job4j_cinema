@@ -34,7 +34,14 @@
             data: {req: 'request from index'},
             dataType: 'json'
         }).done(function (data) {
-            console.log(data);
+            for (row in data) {
+                let addRow = '<th>' + row + '</th>';
+                $('#row th:last').after(addRow);
+                $('#body tbody:first').after('<tr>' + addRow);
+                for (seat in data[row]) {
+                    $('#body td:last').after('<td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>')
+                }
+            }
         }).fail(function (error) {
             alert(error)
         })
@@ -49,13 +56,13 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th style="width: 120px;">Ряд / Место</th>
+                <th style="width: 120px;" id="row">Ряд / Место</th>
                 <th>1</th>
                 <th>2</th>
                 <th>3</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="body">
             <tr>
                 <th>1</th>
                 <td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>
