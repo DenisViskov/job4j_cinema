@@ -34,12 +34,14 @@
             data: {req: 'request from index'},
             dataType: 'json'
         }).done(function (data) {
+            var id = 1;
             for (row in data) {
                 let addRow = '<th>' + row + '</th>';
-                $('#row th:last').after(addRow);
-                $('#body tbody:first').after('<tr>' + addRow);
+                document.getElementById('row').innerHTML = addRow;
+                document.getElementById('body').innerHTML = '<tr id=' + id + '>' + addRow + '</tr>';
                 for (seat in data[row]) {
-                    $('#body td:last').after('<td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>')
+                    document.getElementById(id).innerHTML =
+                        '<td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>'
                 }
             }
         }).fail(function (error) {
