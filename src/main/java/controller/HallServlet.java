@@ -37,23 +37,23 @@ public class HallServlet extends HttpServlet {
     }
 
     private JSONObject aggregatePlace() {
-        JSONObject result = new JSONObject();
         Store store = PsqlStore.instOf();
         List<Place> hall = new ArrayList<>(store.getHall());
         if (hall.isEmpty()) {
             return ifHallIsEmpty(store);
         }
-        for (int i = 0; i < store.getRows().size(); i++) {
-            int row = i + 1;
-            JSONObject jsonObject = new JSONObject();
-            for (Place place : hall) {
-                if (place.getUser() != null) {
-                    jsonObject.put(String.valueOf(place.getSeat()), false);
-                }
-                jsonObject.put(String.valueOf(place.getSeat()), true);
-            }
-            result.put(String.valueOf(row), jsonObject);
-        }
+        return ifHallIsNotEmpty(store);
+    }
+
+    private JSONObject ifHallIsNotEmpty(Store store) {
+        JSONObject result = ifHallIsEmpty(store);
+        List<Place> hall = new ArrayList<>(store.getHall());
+        hall.forEach(place -> {
+            result.remove(String.valueOf(place.getRow()));
+            JSONObject elem = new JSONObject();
+            elem.put(String.valueOf(place.getSeat()), false);
+            result.put(String.valueOf(place.getRow()), elem);
+        });
         return result;
     }
 
