@@ -34,20 +34,27 @@
             data: {req: 'request from index'},
             dataType: 'json'
         }).done(function (data) {
-            var id = 1;
-            for (row in data) {
-                let addRow = '<th>' + row + '</th>';
-                document.getElementById('row').innerHTML = addRow;
-                document.getElementById('body').innerHTML = '<tr id=' + id + '>' + addRow + '</tr>';
-                for (seat in data[row]) {
-                    document.getElementById(id).innerHTML =
-                        '<td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>'
-                }
-                id++;
-            }
+            getContent(data)
         }).fail(function (error) {
             alert(error)
         })
+    }
+
+    function getContent(data) {
+        for (row in data) {
+            let addRow = document.createElement('th')
+            addRow.innerHTML = '<th>' + row + '</th>';
+            document.getElementById('row').append(addRow)
+            let innerRow = document.createElement('tr')
+            innerRow.innerHTML = '<tr></tr>'
+            document.getElementById('body').append(innerRow)
+            innerRow.appendChild(addRow)
+            for (seat in data[row]) {
+                let position = document.createElement('td')
+                position.innerHTML = '<td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>'
+                innerRow.appendChild(position)
+            }
+        }
     }
 </script>
 
@@ -58,8 +65,8 @@
         </h4>
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th style="width: 120px;" id="row">Ряд / Место</th>
+            <tr id="row">
+                <th style="width: 120px;">Ряд / Место</th>
                 <th>1</th>
                 <th>2</th>
                 <th>3</th>
