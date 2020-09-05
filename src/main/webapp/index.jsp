@@ -60,12 +60,19 @@
                 if (placeInHall[seat] == true) {
                     let position = document.createElement('td')
                     position.innerHTML =
-                        '<div><input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</div>'
+                        '<div><input type="radio"' + ' name=' + row + ' value='
+                        + seat + '>' + 'Ряд' + ' '
+                        + row + ',' + 'Место'
+                        + ' ' + seat + '</div>'
                     innerRow.appendChild(position)
                 } else {
                     let position = document.createElement('td')
                     position.innerHTML =
-                        '<div class=' + 'taken' + '>' + '<input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</div>'
+                        '<div class=' + 'taken' + '>' + '<input type="radio"'
+                        + ' name=' + row + ' value='
+                        + seat + '>' + 'Ряд' + ' '
+                        + row + ',' + 'Место'
+                        + ' ' + seat + '</div>'
                     innerRow.appendChild(position)
                 }
             }
