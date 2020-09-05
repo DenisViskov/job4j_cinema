@@ -50,10 +50,18 @@
             document.getElementById('body').append(innerRow)
             innerRow.appendChild(addRow)
             for (seat in data[row]) {
-                let position = document.createElement('td')
-                position.innerHTML =
-                    '<td><input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</td>'
-                innerRow.appendChild(position)
+                var placeInHall = data[row]
+                if (placeInHall[seat] == true) {
+                    let position = document.createElement('td')
+                    position.innerHTML =
+                        '<td><input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</td>'
+                    innerRow.appendChild(position)
+                } else {
+                    let position = document.createElement('td')
+                    position.innerHTML =
+                        '<td bgcolor="#FF0000">' + '<input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</td>'
+                    innerRow.appendChild(position)
+                }
             }
         }
     }
@@ -68,30 +76,9 @@
             <thead>
             <tr id="row">
                 <th style="width: 120px;">Ряд / Место</th>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
             </tr>
             </thead>
             <tbody id="body">
-            <tr>
-                <th>1</th>
-                <td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>
-                <td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>
-                <td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>
-            </tr>
-            <tr>
-                <th>2</th>
-                <td><input type="radio" name="place" value="11"> Ряд 2, Место 1</td>
-                <td><input type="radio" name="place" value="11"> Ряд 2, Место 1</td>
-                <td><input type="radio" name="place" value="11"> Ряд 2, Место 1</td>
-            </tr>
-            <tr>
-                <th>3</th>
-                <td><input type="radio" name="place" value="11"> Ряд 3, Место 1</td>
-                <td><input type="radio" name="place" value="11"> Ряд 3, Место 1</td>
-                <td><input type="radio" name="place" value="11"> Ряд 3, Место 1</td>
-            </tr>
             </tbody>
         </table>
     </div>
