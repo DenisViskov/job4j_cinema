@@ -51,7 +51,8 @@
             innerRow.appendChild(addRow)
             for (seat in data[row]) {
                 let position = document.createElement('td')
-                position.innerHTML = '<td><input type="radio" name="place" value="11"> Ряд 1, Место 1</td>'
+                position.innerHTML =
+                    '<td><input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</td>'
                 innerRow.appendChild(position)
             }
         }
