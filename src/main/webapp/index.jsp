@@ -9,6 +9,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .taken {
+            background: #ff0000
+        }
+    </style>
+
 
     <title>Hello, world!</title>
 </head>
@@ -54,12 +60,12 @@
                 if (placeInHall[seat] == true) {
                     let position = document.createElement('td')
                     position.innerHTML =
-                        '<td><input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</td>'
+                        '<div><input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</div>'
                     innerRow.appendChild(position)
                 } else {
                     let position = document.createElement('td')
                     position.innerHTML =
-                        '<td bgcolor="#FF0000">' + '<input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</td>'
+                        '<div class=' + 'taken' + '>' + '<input type="radio"' + ' name=' + row + ' value=' + seat + '>' + 'Ряд' + ' ' + row + ',' + 'Место' + ' ' + seat + '</div>'
                     innerRow.appendChild(position)
                 }
             }
