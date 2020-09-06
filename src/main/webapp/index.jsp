@@ -33,6 +33,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <script>
+    var target;
     window.onload = function getData() {
         $.ajax({
             type: 'GET',
@@ -63,6 +64,9 @@
                         + seat + '>' + 'Ряд' + ' '
                         + row + ',' + 'Место'
                         + ' ' + seat + '</div>'
+                    position.addEventListener("click", function (event) {
+                        window.target = event.target;
+                    })
                     innerRow.appendChild(position)
                 } else {
                     let position = document.createElement('td')
@@ -72,10 +76,21 @@
                         + seat + '>' + 'Ряд' + ' '
                         + row + ',' + 'Место'
                         + ' ' + seat + '</div>'
+                    position.addEventListener("click", function (event) {
+                        window.target = event.target;
+                    })
                     innerRow.appendChild(position)
                 }
             }
         }
+    }
+
+    function redirect() {
+        let result = window.target
+        var row = result.name
+        var seat = result.value
+        window.location.href =
+            "<%=request.getContextPath()%>/payment/payment.jsp?" + "row=" + row.toString() + "&" + "seat=" + seat.toString()
     }
 </script>
 
@@ -95,7 +110,7 @@
         </table>
     </div>
     <div class="row float-right">
-        <button type="button" class="btn btn-success">Оплатить</button>
+        <button type="button" class="btn btn-success" onclick="redirect()">Оплатить</button>
     </div>
 </div>
 </body>
