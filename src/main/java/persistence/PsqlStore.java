@@ -140,6 +140,9 @@ public class PsqlStore implements Store {
             LOG.error(throwables.getSQLState(), throwables);
             throwables.printStackTrace();
         }
+        if (result == null) {
+            throw new NullPointerException("User not found");
+        }
         return result;
     }
 }
