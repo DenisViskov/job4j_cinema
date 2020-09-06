@@ -15,7 +15,10 @@ import java.io.IOException;
 @WebServlet("/payment")
 public class PaymentServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int row = Integer.valueOf(req.getParameter("row"));
+        int seat = Integer.valueOf(req.getParameter("seat"));
+        String name = req.getParameter("name");
+        String phone = req.getParameter("phone");
     }
 }
