@@ -49,10 +49,9 @@
     function getContent(data) {
         for (row in data) {
             let addRow = document.createElement('th')
-            addRow.innerHTML = '<th>' + row + '</th>';
+            addRow.innerHTML = row
             document.getElementById('row').append(addRow)
             let innerRow = document.createElement('tr')
-            innerRow.innerHTML = '<tr></tr>'
             document.getElementById('body').append(innerRow)
             innerRow.appendChild(addRow)
             for (seat in data[row]) {
