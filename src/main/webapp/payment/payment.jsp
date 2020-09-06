@@ -36,7 +36,7 @@
     function sendPost() {
         $.ajax({
             type: 'POST',
-            url: '<%=request.getContextPath()%>/payment/payment.jsp',
+            url: 'http://localhost:8080/cinema/payment/payment.jsp',
             data: {
                 row: <%=request.getParameter("row")%>,
                 seat: <%=request.getParameter("seat")%>,
@@ -48,6 +48,7 @@
             alert(data)
         }).fail(function (err) {
             alert(err);
+            console.log(err)
         });
     }
 </script>
