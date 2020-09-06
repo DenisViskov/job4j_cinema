@@ -28,7 +28,7 @@
 <div class="container">
     <div class="row pt-3">
         <h3>
-            Вы выбрали ряд 1 место 1, Сумма : 500 рублей.
+            Вы выбрали ряд <%=request.getParameter("row")%> место <%=request.getParameter("seat")%>, Сумма : 500 рублей.
         </h3>
     </div>
     <div class="row">
