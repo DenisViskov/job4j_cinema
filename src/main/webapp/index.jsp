@@ -33,7 +33,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <script>
-    var target;
+    setTimeout(function(){
+        location.reload();
+    }, 20000);
+
+
     window.onload = function getData() {
         $.ajax({
             type: 'GET',
@@ -47,6 +51,7 @@
         })
     }
 
+    var target;
     function getContent(data) {
         for (row in data) {
             let addRow = document.createElement('th')
