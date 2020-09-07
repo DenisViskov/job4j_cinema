@@ -34,11 +34,6 @@ public class HallServlet extends HttpServlet {
         writer.flush();
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
-    }
-
     private JSONObject aggregatePlace() {
         Store store = PsqlStore.instOf();
         List<Place> hall = new ArrayList<>(store.getHall());
