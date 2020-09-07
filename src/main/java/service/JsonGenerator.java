@@ -7,18 +7,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class is a json generator
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 07.09.2020
  */
 public class JsonGenerator implements Parser {
 
+    /**
+     * Store
+     */
     private final Store store;
 
     public JsonGenerator(Store store) {
         this.store = store;
     }
 
+    /**
+     * Method generate places in json
+     *
+     * @return JSONObject
+     */
     @Override
     public JSONObject aggregatePlace() {
         List<Place> hall = new ArrayList<>(store.getHall());
@@ -28,6 +38,12 @@ public class JsonGenerator implements Parser {
         return ifHallIsNotEmpty(store);
     }
 
+    /**
+     * Method generates places in case when hall is not empty
+     *
+     * @param store
+     * @return JSONObject
+     */
     private JSONObject ifHallIsNotEmpty(Store store) {
         JSONObject result = ifHallIsEmpty(store);
         List<Place> hall = new ArrayList<>(store.getHall());
@@ -39,6 +55,12 @@ public class JsonGenerator implements Parser {
         return result;
     }
 
+    /**
+     * Method generates places in case when hall is empty
+     *
+     * @param store
+     * @return JSONObject
+     */
     private JSONObject ifHallIsEmpty(Store store) {
         JSONObject result = new JSONObject();
         for (int i = 0; i < store.getRows().size(); i++) {

@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * Class is a PsqlStore
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 03.09.2020
@@ -73,6 +75,11 @@ public class PsqlStore implements Store {
         return Lazy.INST;
     }
 
+    /**
+     * Method of return places from DB
+     *
+     * @return collection
+     */
     @Override
     public Collection<Place> getHall() {
         List<Place> result = new ArrayList<>();
@@ -92,6 +99,11 @@ public class PsqlStore implements Store {
         return result;
     }
 
+    /**
+     * Method of return rows from hall
+     *
+     * @return collection
+     */
     @Override
     public Collection<Integer> getRows() {
         List<Integer> result = new ArrayList<>();
@@ -108,6 +120,11 @@ public class PsqlStore implements Store {
         return result;
     }
 
+    /**
+     * Method of return seats from rows
+     *
+     * @return collection
+     */
     @Override
     public Collection<Integer> getSeats() {
         List<Integer> result = new ArrayList<>();
@@ -124,6 +141,12 @@ public class PsqlStore implements Store {
         return result;
     }
 
+    /**
+     * Method of looking for user by given id
+     *
+     * @param id
+     * @return user
+     */
     private User findUserByID(int id) {
         User result = null;
         try (Connection connection = pool.getConnection();
@@ -145,6 +168,11 @@ public class PsqlStore implements Store {
         return result;
     }
 
+    /**
+     * Method add new bought place to DB
+     *
+     * @param place
+     */
     @Override
     public void addHall(Place place) {
         User user = addUser(place.getUser());
@@ -160,6 +188,12 @@ public class PsqlStore implements Store {
         }
     }
 
+    /**
+     * Method add user to DB
+     *
+     * @param user
+     * @return user
+     */
     @Override
     public User addUser(User user) {
         try (Connection cn = pool.getConnection();

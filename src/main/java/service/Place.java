@@ -3,6 +3,8 @@ package service;
 import java.util.Objects;
 
 /**
+ * Class of Place
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 03.09.2020

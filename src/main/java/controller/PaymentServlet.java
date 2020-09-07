@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
+ * Class is a payment servlet
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 06.09.2020

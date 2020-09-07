@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Class is a Hall servlet
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 03.09.2020
