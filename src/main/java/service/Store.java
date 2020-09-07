@@ -16,5 +16,7 @@ public interface Store {
 
     Collection<Integer> getSeats();
 
-    User findUserByID(int id);
+    void addHall(Place place);
+
+    User addUser(User user);
 }

@@ -124,8 +124,7 @@ public class PsqlStore implements Store {
         return result;
     }
 
-    @Override
-    public User findUserByID(int id) {
+    private User findUserByID(int id) {
         User result = null;
         try (Connection connection = pool.getConnection();
              PreparedStatement ps = connection.prepareStatement("SELECT * FROM accounts WHERE id=(?)")) {
@@ -144,5 +143,39 @@ public class PsqlStore implements Store {
             throw new NullPointerException("User not found");
         }
         return result;
+    }
+
+    @Override
+    public void addHall(Place place) {
+        User user = addUser(place.getUser());
+        place.setUser(user);
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO halls(rowID,seatID,accountID) VALUES (?,?,?)")) {
+            ps.setInt(1, place.getRow());
+            ps.setInt(2, place.getSeat());
+            ps.setInt(3, user.getId());
+            ps.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public User addUser(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO accounts(name,phone) VALUES (?,?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getNumber());
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys();) {
+                while (id.next()) {
+                    user.setId(id.getInt(1));
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return user;
     }
 }

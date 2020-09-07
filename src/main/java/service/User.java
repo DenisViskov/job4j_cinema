@@ -11,7 +11,7 @@ public class User {
     /**
      * ID
      */
-    private final int id;
+    private int id;
     /**
      * Name
      */
@@ -37,6 +37,10 @@ public class User {
 
     public String getNumber() {
         return number;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

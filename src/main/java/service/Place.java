@@ -23,7 +23,7 @@ public class Place {
     /**
      * User
      */
-    private final User user;
+    private User user;
 
     public Place(int id, int row, int seat, User user) {
         this.id = id;
@@ -46,6 +46,10 @@ public class Place {
 
     public User getUser() {
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
