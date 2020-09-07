@@ -33,23 +33,35 @@
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
+    function validate() {
+        const name = $('#username').val()
+        const phone = $('#phone').val()
+        if (name == '' || phone == '') {
+            alert("Please fill the form field")
+            return false
+        }
+        return true
+    }
+
     function sendPost() {
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:8080/cinema/payment/payment.jsp',
-            data: {
-                row: <%=request.getParameter("row")%>,
-                seat: <%=request.getParameter("seat")%>,
-                name: $('#username').val(),
-                phone: $('#phone').val()
-            },
-            dataType: "json"
-        }).done(function (data) {
-            alert(data)
-        }).fail(function (err) {
-            alert(err);
-            console.log(err)
-        });
+        if (validate()) {
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8080/cinema/payment',
+                data: {
+                    row: <%=request.getParameter("row")%>,
+                    seat: <%=request.getParameter("seat")%>,
+                    name: $('#username').val(),
+                    phone: $('#phone').val()
+                },
+                dataType: "json"
+            }).done(function (data) {
+                alert(data)
+            }).fail(function (err) {
+                alert(err);
+                console.log(err)
+            });
+        }
     }
 </script>
 <div class="container">
