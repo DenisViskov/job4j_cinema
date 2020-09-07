@@ -56,7 +56,9 @@
                 },
                 dataType: "json"
             }).done(function (data) {
-                alert(data)
+                const div = document.createElement('div')
+                div.innerText = 'Ряд: ' + data['row'] + ' Место: ' + data['seat']
+                document.getElementById('form').appendChild(div)
             }).fail(function (err) {
                 alert(err);
                 console.log(err)
@@ -71,7 +73,7 @@
         </h3>
     </div>
     <div class="row">
-        <form>
+        <form id="form">
             <div class="form-group">
                 <label for="username">ФИО</label>
                 <input type="text" class="form-control" id="username" placeholder="ФИО">

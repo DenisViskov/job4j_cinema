@@ -33,7 +33,8 @@ public class PaymentServlet extends HttpServlet {
         Place place = new Place(0, row, seat, new User(0, name, phone));
         store.addHall(place);
         JSONObject json = new JSONObject();
-        json.put("result", "done");
+        json.put("row", row);
+        json.put("seat", seat);
         writer.println(json);
         writer.flush();
     }
