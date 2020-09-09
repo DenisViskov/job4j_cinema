@@ -10,10 +10,7 @@ import service.User;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Class is a PsqlStore
@@ -88,51 +85,9 @@ public class PsqlStore implements Store {
             ResultSet rs = statement.executeQuery("SELECT * FROM halls");
             while (rs.next()) {
                 result.add(new Place(rs.getInt("id"),
-                        rs.getInt("rowID"),
-                        rs.getInt("seatID"),
+                        rs.getInt("row"),
+                        rs.getInt("seat"),
                         findUserByID(rs.getInt("accountID"))));
-            }
-        } catch (SQLException throwables) {
-            LOG.error(throwables.getSQLState(), throwables);
-            throwables.printStackTrace();
-        }
-        return result;
-    }
-
-    /**
-     * Method of return rows from hall
-     *
-     * @return collection
-     */
-    @Override
-    public Collection<Integer> getRows() {
-        List<Integer> result = new ArrayList<>();
-        try (Connection connection = pool.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery("SELECT * FROM rows");
-            while (rs.next()) {
-                result.add(rs.getInt("row"));
-            }
-        } catch (SQLException throwables) {
-            LOG.error(throwables.getSQLState(), throwables);
-            throwables.printStackTrace();
-        }
-        return result;
-    }
-
-    /**
-     * Method of return seats from rows
-     *
-     * @return collection
-     */
-    @Override
-    public Collection<Integer> getSeats() {
-        List<Integer> result = new ArrayList<>();
-        try (Connection connection = pool.getConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery("SELECT * FROM seats");
-            while (rs.next()) {
-                result.add(rs.getInt("seat"));
             }
         } catch (SQLException throwables) {
             LOG.error(throwables.getSQLState(), throwables);
@@ -162,9 +117,6 @@ public class PsqlStore implements Store {
             LOG.error(throwables.getSQLState(), throwables);
             throwables.printStackTrace();
         }
-        if (result == null) {
-            throw new NullPointerException("User not found");
-        }
         return result;
     }
 
@@ -178,10 +130,10 @@ public class PsqlStore implements Store {
         User user = addUser(place.getUser());
         place.setUser(user);
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO halls(rowID,seatID,accountID) VALUES (?,?,?)")) {
-            ps.setInt(1, place.getRow());
-            ps.setInt(2, place.getSeat());
-            ps.setInt(3, user.getId());
+             PreparedStatement ps = cn.prepareStatement("UPDATE halls SET accountID=(?) WHERE row=(?) and seat=(?)")) {
+            ps.setInt(1, place.getUser().getId());
+            ps.setInt(2, place.getRow());
+            ps.setInt(3, place.getSeat());
             ps.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
