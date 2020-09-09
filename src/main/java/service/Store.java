@@ -18,20 +18,6 @@ public interface Store {
     Collection<Place> getHall();
 
     /**
-     * Method should return rows from hall
-     *
-     * @return Collection<Integer>
-     */
-    Collection<Integer> getRows();
-
-    /**
-     * Method should return seats from rows
-     *
-     * @return Collection<Integer>
-     */
-    Collection<Integer> getSeats();
-
-    /**
      * Method should add place to store
      *
      * @param place

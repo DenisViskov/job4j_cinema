@@ -1,6 +1,4 @@
 DROP TABLE IF EXISTS accounts CASCADE;
-DROP TABLE IF EXISTS seats CASCADE;
-DROP TABLE IF EXISTS rows CASCADE;
 DROP TABLE IF EXISTS halls CASCADE;
 
 CREATE TABLE accounts(
@@ -9,36 +7,39 @@ CREATE TABLE accounts(
     phone TEXT UNIQUE
 );
 
-CREATE TABLE seats(
-    id SERIAL PRIMARY KEY,
-    seat INTEGER UNIQUE
-);
-
-CREATE TABLE rows(
-    id SERIAL PRIMARY KEY,
-    row INTEGER UNIQUE
-);
-
 CREATE TABLE halls(
     id SERIAL PRIMARY KEY,
-    rowID INTEGER REFERENCES rows (id),
-    seatID INTEGER REFERENCES seats (id),
+    row INTEGER ,
+    seat INTEGER ,
     accountID INTEGER REFERENCES accounts (id)
 );
 
-INSERT INTO seats(seat) VALUES (1);
-INSERT INTO seats(seat) VALUES (2);
-INSERT INTO seats(seat) VALUES (3);
-INSERT INTO seats(seat) VALUES (4);
-INSERT INTO seats(seat) VALUES (5);
-INSERT INTO seats(seat) VALUES (6);
-INSERT INTO seats(seat) VALUES (7);
-INSERT INTO seats(seat) VALUES (8);
-INSERT INTO seats(seat) VALUES (9);
-INSERT INTO seats(seat) VALUES (10);
+INSERT INTO halls(row,seat) VALUES (1,1);
+INSERT INTO halls(row,seat) VALUES (1,2);
+INSERT INTO halls(row,seat) VALUES (1,3);
+INSERT INTO halls(row,seat) VALUES (1,4);
+INSERT INTO halls(row,seat) VALUES (1,5);
 
-INSERT INTO rows(row) VALUES (1);
-INSERT INTO rows(row) VALUES (2);
-INSERT INTO rows(row) VALUES (3);
-INSERT INTO rows(row) VALUES (4);
-INSERT INTO rows(row) VALUES (5);
+INSERT INTO halls(row,seat) VALUES (2,1);
+INSERT INTO halls(row,seat) VALUES (2,2);
+INSERT INTO halls(row,seat) VALUES (2,3);
+INSERT INTO halls(row,seat) VALUES (2,4);
+INSERT INTO halls(row,seat) VALUES (2,5);
+
+INSERT INTO halls(row,seat) VALUES (3,1);
+INSERT INTO halls(row,seat) VALUES (3,2);
+INSERT INTO halls(row,seat) VALUES (3,3);
+INSERT INTO halls(row,seat) VALUES (3,4);
+INSERT INTO halls(row,seat) VALUES (3,5);
+
+INSERT INTO halls(row,seat) VALUES (4,1);
+INSERT INTO halls(row,seat) VALUES (4,2);
+INSERT INTO halls(row,seat) VALUES (4,3);
+INSERT INTO halls(row,seat) VALUES (4,4);
+INSERT INTO halls(row,seat) VALUES (4,5);
+
+INSERT INTO halls(row,seat) VALUES (5,1);
+INSERT INTO halls(row,seat) VALUES (5,2);
+INSERT INTO halls(row,seat) VALUES (5,3);
+INSERT INTO halls(row,seat) VALUES (5,4);
+INSERT INTO halls(row,seat) VALUES (5,5);
